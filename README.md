@@ -1,65 +1,71 @@
-# microscan-driver
+# driver do microscan
 
-[![Build Status](https://travis-ci.org/jonemo/microscan-driver.svg?branch=master)](https://travis-ci.org/jonemo/microscan-driver)
-[![PyPI version](https://badge.fury.io/py/microscan.svg)](https://badge.fury.io/py/microscan)
+[![Status da construção](https://travis-ci.org/jonemo/microscan-driver.svg?branch=master)](https://travis-ci.org/jonemo/microscan-driver)
+[![Versão PyPI](https://badge.fury.io/py/microscan.svg)](https://badge.fury.io/py/microscan)
 
-Python driver for Microscan barcode readers
+Driver Python para leitores de código de barras Microscan
 
-The author of this software is not affiliated with Microscan Systems Inc.
+O autor deste software não é afiliado à Microscan Systems Inc.
 
-"Microscan" and "MS3" are trademarks of Microscan Systems Inc. and are used in this software and its accompanying documentation to the benefit of the trademark owner, with no intention of infringement.
-
-
-## How to install
-
-Clone this git repository or download the repository as a [zip package](https://github.com/jonemo/microscan-driver/archive/master.zip) and extract.
-Then, from the root folder of the repository, run
-
-```
-$ python setup.py install
-```
-
-Depending on your setup and environment, you might want to consider doing so inside a [virtualenv](https://virtualenv.pypa.io/).
-
-This package only has a single requirement (which is automatically installed when running the above command):
-The [`pyserial` library](https://pythonhosted.org/pyserial/) provides access to the serial port and is implemented in pure Python.
-In other words: This driver does not use any C extensions and should work in many Python implementations.
+"Microscan" e "MS3" são marcas comerciais da Microscan Systems Inc. e são usadas neste software e na documentação que o acompanha em benefício do proprietário da marca comercial, sem intenção de violação.
 
 
-## How to run unit tests
-
-From the root folder of the repo, run:
+## Como instalar
+​
+Clone este repositório git ou baixe o repositório como um [pacote zip](https://github.com/jonemo/microscan-driver/archive/master.zip) e extraia.
+Em seguida, na pasta raiz do repositório, execute
 
 ```
-$ python -m unittest
+$ python setup.py instalação
 ```
 
-No additional dependencies are required.
+Dependendo de sua configuração e ambiente,
+você pode querer considerar fazer isso dentro de um [virtualenv](https://virtualenv.pypa.io/).
+​
+Este pacote possui apenas um único requisito (que é instalado automaticamente ao executar o comando acima):
+A [biblioteca `pyserial`](https://pythonhosted.org/pyserial/) fornece acesso à porta serial e é implementada em Python puro.
+Em outras palavras: Este driver não usa nenhuma extensão C e deve funcionar em muitas implementações Python.
 
 
-## Supported devices
+## Como executar testes de unidade
 
-Currently, this library aims to implement all features documented in the MS3device user manual (with exceptions listed below).
+Na pasta raiz do repositório, execute:
 
+```
+$ python -m teste de unidade
+```
 
-## Not (yet) supported features
+Nenhuma dependência adicional é necessária.
 
-### Specific Settings
+## Dispositivos suportados
 
-The configuration settings listed below are not currently implemented in this library:
+Atualmente, esta biblioteca visa implementar todos os recursos documentados no manual do usuário do dispositivo MS3 (com as exceções listadas abaixo).
 
-* For the Host Port Protocol setting, the values "Multidrop", "User Defined", and "User Defined Multidrop"
-* Matchcode (all functionality described in chapter 7 of the user manual)
-* Configuration settings for the Codabar, Interleaved2Of5, and Pharmacode symbologies
+​
+## Recursos (ainda) não suportados
+​
+### Configurações específicas
+​
+As definições de configuração listadas abaixo não estão implementadas atualmente nesta biblioteca:
 
-A workaround for applications that require these features, is to send the corresponding configuration strings directly using the `MicroscanDriver.write()` method, for example, to only output symbol data on match, but as soon as data is available:
-
+* Para a configuração do Host Port Protocol,
+os valores "Multidrop", "Definido pelo usuário" e "Multidrop definido pelo usuário"
+* Matchcode (todas as funcionalidades descritas no capítulo 7 do manual do usuário)
+* Definições de configuração para as simbologias Codabar, Interleaved2Of5 e Pharmacode
+​
+Uma solução alternativa para aplicativos que exigem esses recursos,
+é enviar as strings de configuração correspondentes diretamente usando o método `MicroscanDriver.write()`, por exemplo, para enviar apenas os dados do símbolo na correspondência, mas assim que os dados estiverem disponíveis:
+​
 ```
 driver = MicroscanDriver('COM3')
+
 driver.write(b'<K705,1,0>')
+
 driver.close()
+
 ```
+​
 
-### General Functionality
-
-No sanity checking is performed on the combinations of settings in a configuration. Only individual settings and their subsettings are (to limited degree) validated against the specification.
+### Funcionalidade geral
+​
+Nenhuma verificação de sanidade é executada nas combinações de configurações em uma configuração. Apenas as configurações individuais e suas subconfigurações são (em grau limitado) validadas em relação à especificação.
