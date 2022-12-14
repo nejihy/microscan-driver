@@ -32,7 +32,7 @@ Em outras palavras: Este driver não usa nenhuma extensão C e deve funcionar em
 Na pasta raiz do repositório, execute:
 
 ```
-$ python -m teste de unidade
+$ python -m unittest
 ```
 
 Nenhuma dependência adicional é necessária.
